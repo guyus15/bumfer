@@ -13,6 +13,9 @@ project "bumfer"
 
     includedirs { "src", "thirdparty/glad/include", "thirdparty/glfw/include" }
 
+    filter { "system:Linux" }
+        links { "dl", "pthread" }
+
     filter { "configurations:Debug" }
         symbols "On"
 
