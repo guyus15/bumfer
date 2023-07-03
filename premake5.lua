@@ -9,9 +9,15 @@ project "bumfer"
 
     files { "src/**.h", "src/**.cpp" }
 
-    links { "GLAD", "GLFW" }
+    links { "GLAD", "GLFW", "DearImGui" }
 
-    includedirs { "src", "thirdparty/glad/include", "thirdparty/glfw/include" }
+    includedirs {
+        "src",
+        "thirdparty/glad/include",
+        "thirdparty/glfw/include",
+        "thirdparty/imgui",
+        "thirdparty/imgui/examples"
+    }
 
     filter { "system:Linux" }
         links { "dl", "pthread" }
@@ -24,3 +30,4 @@ project "bumfer"
 
 include "thirdparty/glad.lua"
 include "thirdparty/glfw.lua"
+include "thirdparty/imgui.lua"
