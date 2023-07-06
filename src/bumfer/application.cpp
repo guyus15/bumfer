@@ -1,5 +1,8 @@
 #include <bumfer/application.h>
 
+#include <bumfer/widgets/widget_manager.h>
+#include <bumfer/widgets/time_date_widget.h>
+
 #include "imgui.cpp"
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
@@ -57,12 +60,16 @@ void Application::Initialise()
 
     ImGui_ImplGlfw_InitForOpenGL(m_window, true);
     ImGui_ImplOpenGL3_Init("#version 120");
+
+    WidgetManager::Initialise();
 }
 
 void Application::Run()
 {
     while (!glfwWindowShouldClose(m_window))
     {
+        WidgetManager::Update();
+
         glfwPollEvents();
 
         ImGui_ImplOpenGL3_NewFrame();
@@ -83,6 +90,8 @@ void Application::Run()
 
 void Application::Dispose()
 {
+    WidgetManager::Dispose();
+
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
