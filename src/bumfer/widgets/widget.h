@@ -1,22 +1,22 @@
 #ifndef BUMFER_WIDGET_H
 #define BUMFER_WIDGET_H
 
-class IWidget
+class Widget
 {
 public:
-    IWidget()
+    Widget()
     {
         Initialise();
     }
 
-    virtual ~IWidget()
+    virtual ~Widget()
     {
         Dispose();
     }
 
-    virtual void Initialise() {};
-    virtual void Update() {};
-    virtual void Dispose() {};
+    virtual void Initialise(){};
+    virtual void Update(){};
+    virtual void Dispose(){};
 };
 
 #endif // BUMFER_WIDGET_H

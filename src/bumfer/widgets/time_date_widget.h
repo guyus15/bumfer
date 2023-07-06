@@ -4,16 +4,19 @@
 #include <bumfer/widgets/widget.h>
 
 #include <chrono>
+#include <string>
 
-class TimeDateWidget : public IWidget
+class TimeDateWidget : public Widget
 {
 public:
     void Initialise() override;
     void Update() override;
-    void Dispose() override;
+
+    [[nodiscard]] std::string GetTimeString() const;
+    [[nodiscard]] std::string GetDateString() const;
 
 private:
-    std::chrono::system_clock m_clock;
+    std::chrono::system_clock::time_point m_current_time_point;
 };
 
 #endif // BUMFER_TIME_DATE_WIDGET_H

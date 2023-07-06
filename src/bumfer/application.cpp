@@ -52,7 +52,7 @@ void Application::Initialise()
     // Setup Dear ImGui context.
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO();
+    ImGuiIO &io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
 
@@ -75,6 +75,22 @@ void Application::Run()
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+
+        if (WidgetManager::HasWidget<TimeDateWidget>())
+        {
+            const TimeDateWidget *time_date_widget = WidgetManager::GetWidget<TimeDateWidget>();
+
+            ImGui::Begin("Time & Date");
+
+            ImGui::Text("%s", time_date_widget->GetDateString().c_str());
+            ImGui::Text("%s", time_date_widget->GetTimeString().c_str());
+
+            ImGui::End();
+        }
+
+        ImGui::Begin("Spotify");
+
+        ImGui::End();
 
         ImGui::ShowDemoWindow();
 

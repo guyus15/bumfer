@@ -11,7 +11,7 @@ void WidgetManager::Initialise()
 
 void WidgetManager::Update()
 {
-    for (const auto& widget : Get().m_registry)
+    for (const auto &[_, widget] : Get().m_registry)
     {
         widget->Update();
     }
@@ -19,13 +19,13 @@ void WidgetManager::Update()
 
 void WidgetManager::Dispose()
 {
-    for (const auto& widget : Get().m_registry)
+    for (const auto &[_, widget] : Get().m_registry)
     {
         widget->Dispose();
     }
 }
 
-WidgetManager& WidgetManager::Get()
+WidgetManager &WidgetManager::Get()
 {
     return s_instance;
 }
