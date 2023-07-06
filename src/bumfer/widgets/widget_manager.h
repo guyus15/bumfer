@@ -3,8 +3,9 @@
 
 #include <bumfer/widgets/widget.h>
 
+#include <cassert>
 #include <memory>
-#include <vector>
+#include <unordered_map>
 
 class WidgetManager
 {
@@ -13,22 +14,36 @@ public:
     static void Update();
     static void Dispose();
 
+    template <typename T>
+    static const T *GetWidget()
+    {
+        const auto it = Get().m_registry.find(typeid(T).hash_code());
+        assert(it != Get().m_registry.end());
+        return dynamic_cast<T *>(it->second.get());
+    }
+
+    template <typename T>
+    static bool HasWidget()
+    {
+        const auto it = Get().m_registry.find(typeid(T).hash_code());
+        return it != Get().m_registry.end();
+    }
+
 private:
-    std::vector<std::unique_ptr<IWidget>> m_registry;
+    std::unordered_map<size_t, std::unique_ptr<Widget>> m_registry;
 
     WidgetManager() = default;
     ~WidgetManager() = default;
 
-    static WidgetManager& Get();
+    static WidgetManager &Get();
     static WidgetManager s_instance;
 
     template <typename T, typename... Args>
     static void Register(Args... args)
     {
         std::unique_ptr<T> widget = std::make_unique<T>(std::forward<Args>(args)...);
-        Get().m_registry.push_back(widget);
-
-        widget->Initialise();
+        Get().m_registry[typeid(T).hash_code()] = std::move(widget);
+        Get().m_registry[typeid(T).hash_code()]->Initialise();
     }
 };
 

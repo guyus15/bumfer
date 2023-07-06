@@ -7,11 +7,23 @@ project "bumfer"
     language "C++"
     cppdialect "C++17"
 
-    files { "src/**.h", "src/**.cpp" }
+    files
+    { 
+        "src/**.h",
+        "src/**.cpp",
+        "src/widgets/**.h",
+        "src/widgets/**.cpp"
+    }
 
-    links { "GLAD", "GLFW", "DearImGui" }
+    links
+    {
+        "GLAD",
+        "GLFW",
+        "DearImGui"
+    }
 
-    includedirs {
+    includedirs
+    {
         "src",
         "thirdparty/glad/include",
         "thirdparty/glfw/include",
