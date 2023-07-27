@@ -29,7 +29,8 @@ project "bumfer"
         "thirdparty/glad/include",
         "thirdparty/glfw/include",
         "thirdparty/imgui",
-        "thirdparty/imgui/examples"
+        "thirdparty/imgui/examples",
+        "thirdparty/rapidjson/include"
     }
 
     filter { "system:Linux" }
