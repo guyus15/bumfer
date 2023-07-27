@@ -7,6 +7,8 @@
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
 
+#include "curl/curl.h"
+
 #include <iostream>
 
 Application::Application()
@@ -22,6 +24,8 @@ Application::~Application()
 
 void Application::Initialise()
 {
+    curl_global_init(CURL_GLOBAL_ALL);
+
     if (!glfwInit())
     {
         std::cout << "Error: Failed to initialise GLFW\n";
@@ -114,4 +118,6 @@ void Application::Dispose()
 
     glfwDestroyWindow(m_window);
     glfwTerminate();
+
+    curl_global_cleanup();
 }

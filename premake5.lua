@@ -19,7 +19,8 @@ project "bumfer"
     {
         "GLAD",
         "GLFW",
-        "DearImGui"
+        "DearImGui",
+        "curl"
     }
 
     includedirs
